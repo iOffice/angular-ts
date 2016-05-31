@@ -1,0 +1,26 @@
+## ANGULAR-TS EDITORCONFIG ##
+
+
+### TOP MOST EDITORCONFIG FILE ###
+root = true
+
+
+### DEFAULT GLOBAL SETTINGS FOR ALL FILES ###
+[*]
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+end_of_line = lf
+indent_style = space
+indent_size = 2
+
+
+### PYTHON ###
+[*.py]
+indent_style = space
+indent_size = 4
+
+
+### MAKEFILE ###
+[Makefile]
+indent_style = tab

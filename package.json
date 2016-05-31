@@ -6,6 +6,11 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "devDependencies": {
+    "eslint": "^2.11.1",
+    "eslint-config-airbnb": "^9.0.1",
+    "eslint-plugin-import": "^1.8.1",
+    "eslint-plugin-jsx-a11y": "^1.2.2",
+    "eslint-plugin-react": "^5.1.1",
     "jasmine": "^2.4.1",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^1.0.1",
@@ -16,11 +21,18 @@
     "ts-loader": "^0.8.2",
     "tslint": "^3.9.0",
     "typescript": "^1.8.10",
-    "typings": "^0.8.1",
+    "typings": "^1.0.4",
     "webpack": "^1.13.0"
   },
   "dependencies": {
     "angular": "^1.5.5"
+  },
+  "eslintConfig": {
+    "extends": "airbnb",
+    "env": {
+      "browser": true,
+      "es6": true
+    }
   },
   "scripts": {
     "pre-release": "./build/pre-publish.sh",
