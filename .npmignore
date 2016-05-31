@@ -1,0 +1,10 @@
+.idea/
+node_modules/
+build/
+examples/
+src/
+
+.editorconfig
+.eslintignore
+.gitattributes
+.npmignore
