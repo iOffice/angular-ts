@@ -37,7 +37,7 @@
   "scripts": {
     "pre-release": "./build/pre-publish.sh",
     "release": "./build/publish.sh",
-    "tsc": "tsc src/index.ts typings/index.d.ts --outDir lib",
+    "tsc": "tsc src/index.ts typings/index.d.ts --outDir lib --declaration",
     "dev": "webpack --config example/js/webpack.config.js --watch",
     "dev-uglify": "export UGLIFY=true; webpack --config example/js/webpack.config.js --watch",
     "serve": "live-server --port=3004 --open=./example",
