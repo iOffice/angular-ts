@@ -1,6 +1,6 @@
 {
   "name": "angular-ts",
-  "description": "An approach to using ES6 class in Angular JS 1.x",
+  "description": "An approach to using ES6 class in Angular JS 1.x with Typescript",
   "version": "0.0.1",
   "private": true,
   "main": "lib/index.js",
@@ -37,7 +37,7 @@
   "scripts": {
     "pre-release": "./build/pre-publish.sh",
     "release": "./build/publish.sh",
-    "tsc": "tsc src/index.ts typings/main.d.ts --outDir lib",
+    "tsc": "tsc src/index.ts typings/index.d.ts --outDir lib",
     "dev": "webpack --config example/js/webpack.config.js --watch",
     "dev-uglify": "export UGLIFY=true; webpack --config example/js/webpack.config.js --watch",
     "serve": "live-server --port=3004 --open=./example",
