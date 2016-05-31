@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true,
+    "target": "es3"
+  },
+  "exclude": [
+    "lib",
+    "node_modules",
+    "typings/browser",
+    "typings/browser.d.ts"
+  ]
+}

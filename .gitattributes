@@ -1,0 +1,16 @@
+## Used to remove files from deployment using `git archive`
+
+# git files
+.gitattributes export-ignore
+.gitignore export-ignore
+
+# directories
+build/ export-ignore
+docs/ export-ignore
+examples/ export-ignore
+reports/ export-ignore
+src/ export-ignore
+
+# hidden files
+.editorconfig export-ignore
+.eslintignore export-ignore

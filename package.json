@@ -1,0 +1,34 @@
+{
+  "name": "angular-ts",
+  "description": "An approach to using ES6 class in Angular JS 1.x",
+  "version": "0.0.0",
+  "private": true,
+  "main": "lib/index.js",
+  "typings": "lib/index.d.ts",
+  "devDependencies": {
+    "jasmine": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2",
+    "karma-webpack": "^1.7.0",
+    "live-server": "^1.0.0",
+    "sinon": "^1.17.4",
+    "ts-loader": "^0.8.2",
+    "tslint": "^3.9.0",
+    "typescript": "^1.8.10",
+    "typings": "^0.8.1",
+    "webpack": "^1.13.0"
+  },
+  "dependencies": {
+    "angular": "^1.5.5"
+  },
+  "scripts": {
+    "pre-release": "./build/pre-publish.sh",
+    "release": "./build/publish.sh",
+    "tsc": "tsc src/index.ts typings/main.d.ts --outDir lib",
+    "dev": "webpack --config example/js/webpack.config.js --watch",
+    "dev-uglify": "export UGLIFY=true; webpack --config example/js/webpack.config.js --watch",
+    "serve": "live-server --port=3004 --open=./example",
+    "start": "npm run serve & npm run dev"
+  }
+}
