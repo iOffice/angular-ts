@@ -61,6 +61,10 @@ class NgRegister {
     };
   }
 
+  module(): ng.IModule {
+    return this.app;
+  }
+
   directive(name: string, constructorFunction: Function): NgRegister {
     const constructorFn: Function = this._normalizeConstructor(constructorFunction);
     const proto: any = constructorFn.prototype;
