@@ -18,8 +18,8 @@ import ILazyLoad = oc.ILazyLoad;
  *
  * You may call `lazyLoadModule` anything you want, this is just a function that will resolve.
  */
-function loadNgModule(callback: Function): Function {
-  return ($q: ng.IQService, $ocLazyLoad: ILazyLoad) => {
+function loadNgModule(callback: Function): any[] {
+  return ['$q', '$ocLazyLoad', ($q: ng.IQService, $ocLazyLoad: ILazyLoad) => {
     return $q((resolve: Function) => {
       callback((file: any) => {
         const module: any = file.default;
@@ -27,7 +27,7 @@ function loadNgModule(callback: Function): Function {
         resolve(module.name);
       });
     });
-  };
+  }];
 }
 
 export default loadNgModule;
