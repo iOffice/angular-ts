@@ -1,14 +1,11 @@
 import DerivedController from './ex-controller';
-import { Injectable } from '../../src/index';
+import { Directive, Inject } from '../../src/index';
 
 
-class ExDirective extends Injectable {
+@Inject(['$interval'])
+class ExDirective extends Directive {
 
   $interval: any;
-  template: string;
-  scope: {};
-  restrict: string;
-  controller: any;
 
   constructor(...args: any[]) {
     super(...args);
@@ -31,8 +28,5 @@ class ExDirective extends Injectable {
   }
 
 }
-Injectable.inject(ExDirective, [
-  '$interval',
-]);
 
 export default ExDirective;
