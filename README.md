@@ -147,10 +147,10 @@ class MyDirective extends Directive {
 }
 ```
 
-This should tell the typescript compiler that the class already declares `template`, `requires` and
-all the other options that a directive provides. Note that the internally all a `Directive` does is
-call `inject` as it has been previously done, so do not forget to call the `super` constructor with
-`args`.
+This tells the typescript compiler that the class already declares `template`, `requires` and
+all the other options that a directive provides. Note that all a `Directive` does is call `inject`
+during initialization as it has been previously done, so do not forget to call the `super`
+constructor with `args`.
 
 For other examples see `example/js/ex-directive.js`. One thing to mention here is that
 `compile`, `link`, `preLink` and `postLink` are optional methods. Please note however that if
