@@ -15,10 +15,12 @@ class MyAngularComponent {
 
   constructor(dependency1, dependency2) {
     this.dependency1 = dependency1;
+    this.dependency2 = dependency2;
     // stuff happens here
   }
   someMethods() {
     this.dependency1.doThatThing();
+    this.dependency2.doThatOtherThing();
     // more stuff here
   }
 }
@@ -27,10 +29,10 @@ MyAngularComponent.$inject = ['dependency1', 'dependency2'];
 
 ngRegister('app')
   .controller('MyController', MyAngularComponent)
-  .service('myService', MyAngularComponent)
-  .provider('myOtherService', MyAngularComponent)
-  .factory('myFactory', MyAngularComponent)
-  .directive('myDirective', MyAngularComponent);
+  .service('myService', MyAngularComponent1)
+  .provider('myOtherService', MyAngularComponent2)
+  .factory('myFactory', MyAngularComponent3)
+  .directive('myDirective', MyAngularComponent4);
 ```
 
 or if you prefer to use the dependencies without declaring them you may use the `inject` function.
@@ -47,6 +49,7 @@ class MyAngularComponent {
   }
   someMethods() {
     this.dependency1.doThatThing();
+    this.dependency2.doThatOtherThing();
     // more stuff here
   }
 }
@@ -55,10 +58,10 @@ inject(MyAngularComponent, ['dependency1', 'dependency2']);
 
 ngRegister('app')
   .controller('MyController', MyAngularComponent)
-  .service('myService', MyAngularComponent)
-  .provider('myOtherService', MyAngularComponent)
-  .factory('myFactory', MyAngularComponent)
-  .directive('myDirective', MyAngularComponent);
+  .service('myService', MyAngularComponent1)
+  .provider('myOtherService', MyAngularComponent2)
+  .factory('myFactory', MyAngularComponent3)
+  .directive('myDirective', MyAngularComponent4);
 ```
 
 If you are using the `experimentalDecorators` option in the typescript compiler you may wish to
@@ -83,10 +86,10 @@ class MyAngularComponent {
 
 ngRegister('app')
   .controller('MyController', MyAngularComponent)
-  .service('myService', MyAngularComponent)
-  .provider('myOtherService', MyAngularComponent)
-  .factory('myFactory', MyAngularComponent)
-  .directive('myDirective', MyAngularComponent);
+  .service('myService', MyAngularComponent1)
+  .provider('myOtherService', MyAngularComponent2)
+  .factory('myFactory', MyAngularComponent3)
+  .directive('myDirective', MyAngularComponent4);
 ```
 
 ## Directives
@@ -94,12 +97,43 @@ ngRegister('app')
 The angular-1.x directives usually have a lot of options that you can provide. At some point it can
 get annoying writing something like
 
+
+```typescript
+import { Inject } from 'angular-ts';
+
+@Inject(['a', 'b'])
+class MyDirective {
+
+  // Directive options
+  template: string;
+  requires: string[];
+  // ... other directive options
+
+  // Injected Dependencies
+  a: any;
+  b: any;
+
+  constructor(...args: any[]) {
+    inject(this, args);
+    this.template = 'template goes here';
+    this.requires: ['other directives']
+    ...
+    // and so on ...
+  }
+
+}
+```
+
+
+Instead, we may extend from `Directive` and skip declaring the directive options.
+
 ```typescript
 import { Directive, Inject } from 'angular-ts';
 
 @Inject(['a', 'b'])
 class MyDirective extends Directive {
 
+  // Injected Dependencies
   a: any;
   b: any;
 
@@ -114,10 +148,10 @@ class MyDirective extends Directive {
 }
 ```
 
-**NOTE:** Do not forget to call the `super` constructor with `args`. This should tell the typescript
-compiler that the class already declares `template`, `requires` and all the other options that
-a directive provides. Note that the internally all a `Directive` does is call `inject` as it has
-been previously done.
+This should tell the typescript compiler that the class already declares `template`, `requires` and
+all the other options that a directive provides. Note that the internally all a `Directive` does is
+call `inject` as it has been previously done, so do not forget to call the `super` constructor with
+`args`.
 
 For other examples see `example/js/ex-directive.js`. One thing to mention here is that
 `compile`, `link`, `preLink` and `postLink` are optional methods. Please note however that if
