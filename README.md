@@ -65,7 +65,7 @@ ngRegister('app')
 ```
 
 If you are using the `experimentalDecorators` option in the typescript compiler you may wish to
-use the `Inject`. This allows us to write the previous example as
+use the `Inject` decorator. This allows us to write the previous example as
 
 ```typescript
 import { ngRegister, inject } from 'angular-ts';
