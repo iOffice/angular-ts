@@ -5,69 +5,134 @@ This library provides the `ngRegister` function which is a modified copy of Mich
 
 ## Example
 
-The library allows us to declare classes and register them as angular components. Here is a summary
+`angular-ts` allows us to declare classes and register them as angular components. Here is a summary
 
-```javascript
-import { ngRegister } from 'angular-es6';
+```typescript
+import { ngRegister } from 'angular-ts';
 
 
 class MyAngularComponent {
 
-    constructor(dependency1, dependency2) {
-        this.dependency1 = dependency1;
-        // stuff happens here
-    }
-    someMethods() {
-        this.dependency1.doThatThing();
-        // more stuff here
-    }
+  constructor(dependency1, dependency2) {
+    this.dependency1 = dependency1;
+    // stuff happens here
+  }
+  someMethods() {
+    this.dependency1.doThatThing();
+    // more stuff here
+  }
 }
 MyAngularComponent.$inject = ['dependency1', 'dependency2'];
 
 
 ngRegister('app')
-    .controller('MyController', MyAngularComponent)
-    .service('myService', MyAngularComponent)
-    .provider('myOtherService', MyAngularComponent)
-    .factory('myFactory', MyAngularComponent)
-    .directive('myDirective', MyAngularComponent);
+  .controller('MyController', MyAngularComponent)
+  .service('myService', MyAngularComponent)
+  .provider('myOtherService', MyAngularComponent)
+  .factory('myFactory', MyAngularComponent)
+  .directive('myDirective', MyAngularComponent);
 ```
 
-or if you prefer to use the dependencies without declaring them you may inherit from `Injectable`.
+or if you prefer to use the dependencies without declaring them you may use the `inject` function.
 
-```javascript
-import { ngRegister, Injectable } from 'angular-ts';
+```typescript
+import { ngRegister, inject } from 'angular-ts';
 
 
-class MyAngularComponent extends Injectable {
+class MyAngularComponent {
 
-    constructor(...args) {
-        super(...args);
-        // stuff happens here
-    }
-    someMethods() {
-        this.dependency1.doThatThing();
-        // more stuff here
-    }
+  constructor(...args) {
+    inject(this, args);
+    // stuff happens here
+  }
+  someMethods() {
+    this.dependency1.doThatThing();
+    // more stuff here
+  }
 }
-Injectable.inject(MyAngularComponent, ['dependency1', 'dependency2']);
+inject(MyAngularComponent, ['dependency1', 'dependency2']);
 
 
 ngRegister('app')
-    .controller('MyController', MyAngularComponent)
-    .service('myService', MyAngularComponent)
-    .provider('myOtherService', MyAngularComponent)
-    .factory('myFactory', MyAngularComponent)
-    .directive('myDirective', MyAngularComponent);
+  .controller('MyController', MyAngularComponent)
+  .service('myService', MyAngularComponent)
+  .provider('myOtherService', MyAngularComponent)
+  .factory('myFactory', MyAngularComponent)
+  .directive('myDirective', MyAngularComponent);
 ```
 
-**NOTE:** Do not forget to call the `super` constructor with `...args`.
+If you are using the `experimentalDecorators` option in the typescript compiler you may wish to
+use the `Inject`. This allows us to write the previous example as
 
-If you need to make a component that is `Injectable` and extends from some other class you may
+```typescript
+import { ngRegister, inject } from 'angular-ts';
+
+@Inject(['dependency1', 'dependency2']);
+class MyAngularComponent {
+
+  constructor(...args) {
+    inject(this, args);
+    // stuff happens here
+  }
+  someMethods() {
+    this.dependency1.doThatThing();
+    // more stuff here
+  }
+}
+
+
+ngRegister('app')
+  .controller('MyController', MyAngularComponent)
+  .service('myService', MyAngularComponent)
+  .provider('myOtherService', MyAngularComponent)
+  .factory('myFactory', MyAngularComponent)
+  .directive('myDirective', MyAngularComponent);
+```
+
+## Directives
+
+The angular-1.x directives usually have a lot of options that you can provide. At some point it can
+get annoying writing something like
+
+```typescript
+import { Directive, Inject } from 'angular-ts';
+
+@Inject(['a', 'b'])
+class MyDirective extends Directive {
+
+  a: any;
+  b: any;
+
+  constructor(...args: any[]) {
+    super(args);
+    this.template = 'template goes here';
+    this.requires: ['other directives']
+    ...
+    // and so on ...
+  }
+
+}
+```
+
+**NOTE:** Do not forget to call the `super` constructor with `args`. This should tell the typescript
+compiler that the class already declares `template`, `requires` and all the other options that
+a directive provides. Note that the internally all a `Directive` does is call `inject` as it has
+been previously done.
+
+For other examples see `example/js/ex-directive.js`. One thing to mention here is that
+`compile`, `link`, `preLink` and `postLink` are optional methods. Please note however that if
+`postLink` and `link` are both declared then only the `postLink` method will be called. These two
+methods should be one and the same so only declare one.
+
+
+## Mixins
+
+If you need to make a component that is a `Directive` and extends from some other class you may
 use the `mix` function provided by this library. For instance:
 
-```javascript
-import { Injectable, mix } from 'angular-ts';
+
+```typescript
+import { Directive, Inject, mix } from 'angular-ts';
 
 
 class OtherClass {
@@ -84,10 +149,15 @@ class OtherClass {
 
 }
 
-class SomeController extends mix(Injectable, OtherClass) {
+@Inject([
+  'dep1',
+  'dep2',
+  // and so on ...
+])
+class SomeController extends mix(Directive, OtherClass) {
 
   constructor(...args) {
-    super([Injectable, ...args], [OtherClass, 1, 2, 3]);
+    super([Directive, args], [OtherClass, 1, 2, 3]);
   }
 
   doSomething() {
@@ -96,62 +166,10 @@ class SomeController extends mix(Injectable, OtherClass) {
   }
 
 }
-Injectable.inject(SomeController, [
-  'dep1',
-  'dep2',
-  // and so on ...
-]);
 ```
-
-If we have `experimentalDecorators` turned on on the typescript compiler we may write an angular
-component as follows:
-
-```javascript
-import { ngRegister, Injectable, Inject } from 'angular-ts';
-
-
-@Inject(['dependency1', 'dependency2'])
-class MyAngularComponent extends Injectable {
-
-    constructor(...args) {
-        super(...args);
-        // stuff happens here
-    }
-    someMethods() {
-        this.dependency1.doThatThing();
-        // more stuff here
-    }
-}
-
-
-ngRegister('app')
-    .controller('MyController', MyAngularComponent)
-    .service('myService', MyAngularComponent)
-    .provider('myOtherService', MyAngularComponent)
-    .factory('myFactory', MyAngularComponent)
-    .directive('myDirective', MyAngularComponent);
-```
-
 
 NOTE: Do not use `instanceof` when using `mix`. Instead use the `isinstance` function provided by
 the library.
 
-### Creating directives
-
-See `example/js/ex-directive.js`. One thing to mention here is that `compile`, `link`, `preLink` and
-`postLink` are optional methods. Please note however that if `postLink` and `link` are both declared
-then only the `postLink` method will be called. These two methods should be one and the same so only
-declare one.
-
-### IE & Babel WARNING
-
-When using inheritance using babel we need the following polyfill in IE:
-
-```javascript
-const key = 'setPrototypeOf';
-if (typeof Object[key] === 'undefined') {
-  Object[key] = require('babel-runtime/helpers/defaults.js').default;
-}
-```
 
 [1]: https://github.com/michaelbromley/angular-es6
