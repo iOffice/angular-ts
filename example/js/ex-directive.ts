@@ -8,7 +8,7 @@ class ExDirective extends Directive {
   $interval: any;
 
   constructor(...args: any[]) {
-    super(...args);
+    super(args);
     console.log('ExDirective: ', this);
     this.template = '<div>I\'m a directive!</div>';
     this.restrict = 'EA';

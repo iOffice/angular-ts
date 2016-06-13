@@ -1,35 +1,31 @@
-class Injectable {
-
-  constructor(...args: any[]) {
-    this.constructor.$inject.forEach((name: string, index: number) => {
-      this[name] = args[index];
+function inject(clazz: any, injectables: (string | any)[]): void {
+  if (typeof clazz !== 'function') {
+    clazz.constructor.$inject.forEach((name: string, index: number) => {
+      clazz[name] = injectables[index];
     });
+    return;
   }
-
-  static inject(clazz: any, injectables: any[]): void {
-    if (!clazz.$inject) {
-      clazz.$inject = [];
-    } else {
-      clazz.$inject = clazz.$inject.slice(0);
+  if (!clazz.$inject) {
+    clazz.$inject = [];
+  } else {
+    clazz.$inject = clazz.$inject.slice(0);
+  }
+  injectables.forEach((injectable: string) => {
+    if (clazz.$inject.indexOf(injectable) === -1) {
+      clazz.$inject.push(injectable);
     }
-    injectables.forEach((injectable: string) => {
-      if (clazz.$inject.indexOf(injectable) === -1) {
-        clazz.$inject.push(injectable);
-      }
-    });
-  }
-
+  });
 }
 
 
 function Inject(args: string[]): Function {
   return (target: any) => {
-    Injectable.inject(target, args);
+    inject(target, args);
   };
 }
 
 
 export {
-  Injectable,
   Inject,
+  inject,
 };

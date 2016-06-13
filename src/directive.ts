@@ -1,4 +1,4 @@
-import { Injectable } from './injectable';
+import { inject } from './injectable';
 
 
 interface Directive {
@@ -51,7 +51,13 @@ interface Directive {
 }
 
 
-class Directive extends Injectable {}
+class Directive {
+
+  constructor(args: any[]) {
+    inject(this, args);
+  }
+
+}
 
 
 export {

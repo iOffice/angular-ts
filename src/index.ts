@@ -1,11 +1,11 @@
-import { Injectable, Inject } from './injectable';
+import { Inject, inject } from './injectable';
 import { Directive } from './directive';
 import ngRegister from './ng-register';
 import { mix, isinstance } from './mix';
 import loadNgModule from './loadNgModule';
 
 export {
-  Injectable,
+  inject,
   Inject,
   Directive,
   ngRegister,
