@@ -1,7 +1,6 @@
 # Angular TS
 
-This library provides the `ngRegister` function which is a modified copy of Michael Bromley's
-[`register.js`][1].
+This library provides `ngRegister`, a modified version of Michael Browmley's [`register.js`][1].
 
 ## Example
 
@@ -206,4 +205,174 @@ NOTE: Do not use `instanceof` when using `mix`. Instead use the `isinstance` fun
 the library.
 
 
+## API
+
+#### `inject(clazz: any, injectables: (string | any)[]): void`
+
+Can be used after a class declaration to inject its dependencies as well as inside the constructor
+to attach the dependecies to an instance of the class.
+
+```typescript
+import { inject } from 'angular-ts';
+
+class A {
+
+  constructor(...args: any[]) {
+    inject(this, args);
+  }
+
+}
+inject(A, ['a', 'b']);
+```
+
+Note that when using after the declaration we must provide the class object and not an instance as
+we have done in the constructor.
+
+#### `Inject(args: string[]): Function`
+
+A decorator to replace using `inject` after the class declaration. This allows us to see the
+dependencies that an angular component uses right in the class declaration.
+
+```typescript
+import { Inject, inject } from 'angular-ts';
+
+@Inject(['a', 'b'])
+class A {
+
+  constructor(...args: any[]) {
+    inject(this, args);
+  }
+
+}
+```
+
+### `class Directive`
+
+Utility class which provides the following interface:
+
+```typescript
+interface Directive {
+    controller?: any;
+    controllerAs?: string;
+    bindToController?: boolean | Object;
+    multiElement?: boolean;
+    name?: string;
+    priority?: number;
+    replace?: boolean;
+    require?: string | string[] | {
+        [controller: string]: string;
+    };
+    restrict?: string;
+    scope?: boolean | Object;
+    template?: string | Function;
+    templateNamespace?: string;
+    templateUrl?: string | Function;
+    terminal?: boolean;
+    transclude?: boolean | string | {
+        [slot: string]: string;
+    };
+    compile?(templateElement: ng.IAugmentedJQuery, templateAttributes: ng.IAttributes, transclude?: ng.ITranscludeFunction): void;
+    link?(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, controller: any, transclude: ng.ITranscludeFunction): void;
+    preLink?(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, controller: any, transclude: ng.ITranscludeFunction): void;
+    postLink?(scope: ng.IScope, instanceElement: ng.IAugmentedJQuery, instanceAttributes: ng.IAttributes, controller: any, transclude: ng.ITranscludeFunction): void;
+}
+```
+
+Any angular component extending from `Directive` will need to call `super` with the constructors
+`arguments`.
+
+```typescript
+import { Directive, Inject } from 'angular-ts';
+
+@Inject(['a', 'b'])
+class A extends Directive {
+  constructor(...args: any[]) {
+    super(args);
+  }
+}
+```
+
+#### `ngRegister(appName: string, dependencies?: string[]): NgRegister`
+
+Provides a wrapper for `angular.module`, we can create a brand new angular module by providing the
+module dependencies or get the angular module by omitting them. This will return an instance of
+`NgRegister` which provides all the methods an angular module has: `controller`, `directive`,
+`service`, etc. To obtain the non-wrapped angular module use the method `module`.
+
+```typescript
+import { ngRegister } from 'angular-ts';
+
+const app = ngRegister('mymodule', [])
+  .controller('ctrl', Ctr)
+  .directive('dir', Dir)
+  // ...
+  .module();
+```
+
+#### `mix(...mixins: any[]): typeof IMixin`
+
+Allows us to create a custom class which combines all the methods of the specified `mixins`.
+
+```typescript
+class A {
+  a: number;
+  constructor(a: number) {
+    this.a = a;
+  }
+  printA() { console.log(this.a); }
+}
+
+class B {
+  b: number;
+  constructor(b: number) {
+    this.b = b;
+  }
+  printB() { console.log(this.b); }
+}
+
+class C extends mix(A, B) {
+  c: number;
+  constructor(a: number, b: number, c: number) {
+    super([A, a], [B, b]);
+    this.c = c;
+  }
+  printC() { console.log('c'); }
+}
+
+const obj: C = new C(1, 2, 3);
+obj.printA();
+obj.printB();
+obj.printC();
+```
+
+#### `isinstance(object: any, classinfo: any): boolean`
+
+Used to check if an object is an instance of a given class. We may provide an array in the second
+argument if we want to check if an object is an instance of any of classes in the array.
+
+
+#### `loadNgModule(callback: Function): any[]`,
+
+Utility function to help lazy load angular modules. To use it first require the module with
+webpacks `bundle` loader:
+
+    const lazyBundleCallback = require('bundle?lazy!./realative/path/to/angular/module');
+
+Then on the router load it on a resolve, for instance:
+
+    .state('somestate', {
+      url: 'someurl/',
+      views: {...},
+      resolve: {
+         lazyLoadModule: loadNgModule(lazyBundleCallback),
+      }
+    });
+
+You may call `lazyLoadModule` anything you want, this is just a function that will resolve.
+
+Note: You will need to register `ocLazyLoad` with the app in order for this to work.
+
+
 [1]: https://github.com/michaelbromley/angular-es6
+
+
