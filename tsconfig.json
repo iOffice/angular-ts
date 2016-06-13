@@ -1,6 +1,8 @@
 {
   "compilerOptions": {
+    "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "noEmitHelpers": true,
     "target": "es3"
   },
   "exclude": [

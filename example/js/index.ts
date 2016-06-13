@@ -1,3 +1,4 @@
+import 'ts-helpers';
 import { ngRegister } from '../../src/index';
 import ExDirective from './ex-directive';
 import ExService from './ex-service';
