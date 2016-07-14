@@ -4,7 +4,7 @@ VERSION=$(node --eval "console.log(require('./package.json').version);")
 
 git checkout -b build
 
-npm run tsc
+bash build/transpile.sh || exit 0
 git add lib/ -f
 
 git commit -m "v$VERSION"
