@@ -6,6 +6,8 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "devDependencies": {
+    "@types/lodash": "^4.14.37",
+    "@types/node": "^6.0.45",
     "eslint": "2.11.1",
     "eslint-config-airbnb": "9.0.1",
     "eslint-plugin-import": "1.8.1",
@@ -17,10 +19,11 @@
     "karma-jasmine": "1.0.2",
     "karma-webpack": "1.7.0",
     "live-server": "1.0.0",
+    "npm-run-all": "^3.1.0",
     "sinon": "1.17.4",
     "ts-loader": "0.8.2",
     "tslint": "3.9.0",
-    "typescript": "1.8.10",
+    "typescript": "^2.0.3",
     "typings": "1.0.4",
     "webpack": "1.13.0"
   },
@@ -36,8 +39,10 @@
     }
   },
   "scripts": {
-    "test": "karma start ./build/karma.config.js --single-run",
-    "tsc": "bash build/transpile.sh",
+    "build-tools": "bash ./build-tools/transpile-build-tools.sh",
+    "karma": "karma start ./build/karma.config.js --single-run",
+    "test": "run-s build-tools karma",
+    "tsc": "bash ./build-tools/transpile.sh",
     "pre-release": "./build/pre-publish.sh",
     "release": "./build/publish.sh",
     "dev": "webpack --config ./build-tools/webpack.config.js --watch",

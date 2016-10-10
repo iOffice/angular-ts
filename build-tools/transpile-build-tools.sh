@@ -1,11 +1,13 @@
 #!/usr/bin/env bash
 
 tsc \
-  src/index.ts \
-  typings/index.d.ts \
-  --outDir lib \
+  ./build-tools/karma.config.ts \
+  --outDir build \
   --declaration \
   --experimentalDecorators \
   --emitDecoratorMetadata \
-  --target es3 \
+  --target es5 \
   --noEmitHelpers
+
+tslint \
+  ./build-tools/karma.config.ts
