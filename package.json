@@ -6,8 +6,11 @@
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
   "devDependencies": {
-    "@types/lodash": "^4.14.37",
-    "@types/node": "^6.0.45",
+    "@types/colors": "0.6.33",
+    "@types/lodash": "4.14.37",
+    "@types/node": "6.0.45",
+    "@types/yargs": "0.0.33",
+    "colors": "^1.1.2",
     "eslint": "2.11.1",
     "eslint-config-airbnb": "9.0.1",
     "eslint-plugin-import": "1.8.1",
@@ -19,13 +22,15 @@
     "karma-jasmine": "1.0.2",
     "karma-webpack": "1.7.0",
     "live-server": "1.0.0",
-    "npm-run-all": "^3.1.0",
+    "npm-run-all": "3.1.0",
     "sinon": "1.17.4",
     "ts-loader": "0.8.2",
-    "tslint": "3.9.0",
-    "typescript": "^2.0.3",
+    "ts-node": "1.4.1",
+    "tslint": "^3.15.1",
+    "typescript": "2.0.3",
     "typings": "1.0.4",
-    "webpack": "1.13.0"
+    "webpack": "1.13.0",
+    "yargs": "6.0.0"
   },
   "dependencies": {
     "angular": "1.5.5",
@@ -39,13 +44,14 @@
     }
   },
   "scripts": {
-    "build-tools": "bash ./build-tools/transpile-build-tools.sh",
+    "build-tools": "ts-node ./build-tools/transpile.ts --build-tools",
     "karma": "karma start ./build/karma.config.js --single-run",
-    "test": "run-s build-tools karma",
+    "test": "run-s 'build-tools karma' karma",
+    "webpack": "webpack --config ./build/webpack.config.js --watch",
+    "dev": "run-s build-tools webpack",
     "tsc": "bash ./build-tools/transpile.sh",
     "pre-release": "./build/pre-publish.sh",
     "release": "./build/publish.sh",
-    "dev": "webpack --config ./build-tools/webpack.config.js --watch",
     "dev-uglify": "export UGLIFY=true; webpack --config ./build-tools/webpack.config.js --watch",
     "serve": "live-server --port=3004 --open=./example",
     "start": "npm run serve & npm run dev"

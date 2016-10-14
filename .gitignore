@@ -3,7 +3,5 @@ node_modules/
 build/
 typings/
 lib/
-src/**/*.js
-example/**/*.js
-test/**/*.js
+**/*.js
 dist/

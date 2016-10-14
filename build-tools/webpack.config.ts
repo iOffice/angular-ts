@@ -1,12 +1,11 @@
-const path = require('path');
-const webpack = require('webpack');
+import { Configuration, optimize } from 'webpack';
+import * as path from 'path';
 
-const DEVELOPMENT = process.argv.indexOf('--watch') > 0;
-const UGLIFY = process.env.UGLIFY === 'true' || !DEVELOPMENT;
-const rel = x => path.resolve(__dirname, x);
+const DEVELOPMENT: boolean = process.argv.indexOf('--watch') > 0;
+const UGLIFY: boolean = process.env.UGLIFY === 'true' || !DEVELOPMENT;
+const rel: Function = (x: string) => path.resolve(__dirname, x);
 
-
-const config = {
+const config: Configuration = {
   entry: {
     'dist/all': rel('../example/src/index.ts'),
   },
@@ -34,13 +33,12 @@ const config = {
   plugins: [],
 };
 
-
 if (DEVELOPMENT) {
   config.devtool = 'eval';
 }
 
 if (UGLIFY) {
-  config.plugins.push(new webpack.optimize.UglifyJsPlugin({
+  config.plugins.push(new optimize.UglifyJsPlugin({
     mangle: true,
     compress: {
       drop_console: false,

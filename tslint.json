@@ -9,8 +9,6 @@
     "ban": [
       true,
       [ "_", "forEach" ],
-      [ "_", "each" ],
-      [ "$", "each" ],
       [ "angular", "forEach" ]
     ],
     "class-name": true,
@@ -69,9 +67,8 @@
       true,
       "check-function-in-method"
     ],
-    "no-null-keyword": true,
     "no-reference": true,
-    "no-require-imports": true,
+    "no-require-imports": false,
     "no-shadowed-variable": true,
     "no-string-literal": true,
     "no-switch-case-fall-through": true,
@@ -81,7 +78,7 @@
     "no-unused-variable": true,
     "no-use-before-declare": true,
     "no-var-keyword": true,
-    "no-var-requires": true,
+    "no-var-requires": false,
     "object-literal-sort-keys": false,
     "one-line": [
       true,
@@ -118,7 +115,6 @@
       true,
       "call-signature",
       "parameter",
-      "arrow-parameter",
       "property-declaration",
       "variable-declaration",
       "member-variable-declaration"

@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "noImplicitAny": true,
+    "strictNullChecks": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitHelpers": true,
@@ -7,6 +9,7 @@
   },
   "exclude": [
     "lib",
+    "build",
     "node_modules"
   ]
 }
