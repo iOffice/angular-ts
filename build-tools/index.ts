@@ -1,11 +1,11 @@
-import { readFileSync } from 'fs';
+import { readFileSync, writeFileSync, statSync, Stats } from 'fs';
 import * as colors from 'colors';
 import * as ts from 'typescript';
 import * as Lint from 'tslint/lib/lint';
 import * as Linter from 'tslint/lib/tslint';
 import * as _ from 'lodash';
 
-type MessageCategory = 'error' | 'warning' | 'info' | 'log' | 'debug'
+type MessageCategory = 'error' | 'warning' | 'info' | 'log' | 'debug';
 
 interface ITSMessage {
   message: string;
@@ -26,6 +26,11 @@ interface IFileErrorsMap {
   [key: string]: IFileMessages;
 }
 
+interface IProject {
+  name: string;
+  files: string[];
+}
+
 function getDiagnosticCategory(category: ts.DiagnosticCategory): MessageCategory {
   const map: { [key: number]: MessageCategory } = {
     [ts.DiagnosticCategory.Error]: 'error',
@@ -35,25 +40,82 @@ function getDiagnosticCategory(category: ts.DiagnosticCategory): MessageCategory
   return map[category];
 }
 
-function getProjectConfig(name: string): any {
-  const config: string = `${process.cwd()}/${name}.json`;
+function _parseJSONFile(fileName: string): any {
   try {
-    return JSON.parse(readFileSync(config, 'utf8'));
+    return JSON.parse(readFileSync(fileName, 'utf8'));
   } catch (e) {
     return null;
   }
 }
 
+function getProjectConfig(name: string): any {
+  const config: string = `${process.cwd()}/${name}.json`;
+  return _parseJSONFile(config);
+}
+
+function filterModifiedFiles(project: IProject, targetDir: string, force?: boolean): string[] {
+  const statsFile: string = `${targetDir}/.ts-stats.json`;
+  let projectTimes: any = _parseJSONFile(statsFile) || {};
+  let cached: boolean = true;
+  if (!projectTimes[project.name]) {
+    projectTimes[project.name] = {};
+    cached = false;
+  }
+  if (!cached || force) {
+    return project.files;
+  }
+
+  const times: any = projectTimes[project.name];
+  const filesToFilter: string[] = _.keys(times);
+  return _.filter(filesToFilter, (fileName) => {
+    const stats: Stats = statSync(fileName);
+    return times[fileName] === 0 || stats.mtime > new Date(times[fileName]);
+  });
+}
+
+function storeModifiedDates(
+  project: IProject,
+  results: IFileErrorsMap,
+  emittedFiles: string[],
+  targetDir: string,
+): void {
+  const statsFile: string = `${targetDir}/.ts-stats.json`;
+  let projectTimes: any = _parseJSONFile(statsFile) || {};
+  if (!projectTimes[project.name]) {
+    projectTimes[project.name] = {};
+  }
+  const times: any = projectTimes[project.name];
+  _.each(emittedFiles, (fileName) => {
+    const stats: Stats = statSync(fileName);
+    const result: IFileMessages = _.find(results, (file: IFileMessages) => {
+      return file.path === fileName;
+    });
+    if (result && result.messages.length) {
+      times[fileName] = 0;
+    } else {
+      times[fileName] = stats.mtime;
+    }
+  });
+  writeFileSync(statsFile, JSON.stringify(projectTimes, null, 2));
+}
+
 function compile(
-  fileNames: string[],
+  project: IProject,
   tsOptions: ts.CompilerOptions,
-  lintOptions?: Lint.ILinterOptionsRaw
+  lintOptions?: Lint.ILinterOptionsRaw,
+  force?: boolean,
 ): IFileErrorsMap {
-  const program: ts.Program = ts.createProgram(fileNames, tsOptions);
+  const results: IFileErrorsMap = {};
+  const modifiedFiles: string[] = filterModifiedFiles(project, tsOptions.outDir || '.', force);
+  if (!modifiedFiles.length) {
+    return results;
+  }
+  const program: ts.Program = ts.createProgram(modifiedFiles, tsOptions);
   const emitResult: ts.EmitResult = program.emit();
   const preDiagnostics: ts.Diagnostic[] = ts.getPreEmitDiagnostics(program);
   const allDiagnostics: ts.Diagnostic[] = preDiagnostics.concat(emitResult.diagnostics);
-  const results: IFileErrorsMap = {};
+  const emittedFiles: ts.SourceFile[] = program.getSourceFiles()
+    .filter(x => !_.includes(x.fileName, 'node_modules'));
 
   _.each(allDiagnostics, (diagnostic) => {
     const file: ts.SourceFile = diagnostic.file;
@@ -81,9 +143,7 @@ function compile(
   });
 
   if (lintOptions) {
-    const filesToLint: ts.SourceFile[] = program.getSourceFiles()
-      .filter(x => !_.includes(x.fileName, 'node_modules'));
-    _.each(filesToLint, (file) => {
+    _.each(emittedFiles, (file) => {
       const fileName: string = file.fileName;
       const linter: Linter = new Linter(
         file.fileName, '', {
@@ -116,6 +176,7 @@ function compile(
       fileMessages.messages.sort((a, b) => a.line - b.line);
     });
   }
+  storeModifiedDates(project, results, emittedFiles.map(x => x.path), tsOptions.outDir || '.');
 
   return results;
 }
@@ -134,7 +195,7 @@ function breakMsg(msg: string, size: number): string[] {
   const line: string[] = [];
   let length: number = 0;
   _.each(words, (word) => {
-    if (length + word.length < size) {
+    if (length + word.length <= size) {
       line.push(word);
       length += word.length + 1;
     } else {
@@ -144,7 +205,7 @@ function breakMsg(msg: string, size: number): string[] {
       length = word.length + 1;
     }
   });
-  result.push(line.join(' '));
+  result.push(line.join(' ').trim());
   return result;
 }
 
@@ -228,6 +289,7 @@ function formatResults(results: IFileErrorsMap): string {
 }
 
 export {
+  IProject,
   MessageCategory,
   ITSMessage,
   IFileMessages,
