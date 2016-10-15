@@ -38,7 +38,7 @@ if (DEVELOPMENT) {
 }
 
 if (UGLIFY) {
-  config.plugins.push(new optimize.UglifyJsPlugin({
+  config.plugins!.push(new optimize.UglifyJsPlugin({
     mangle: true,
     compress: {
       drop_console: false,

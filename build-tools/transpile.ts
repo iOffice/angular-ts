@@ -26,7 +26,7 @@ const argv: IArgs = yargs.usage('usage: $0 project')
   .help('help')
   .argv;
 
-const tsconfig: ts.CompilerOptions = getProjectConfig('tsconfig');
+const tsconfig: ts.CompilerOptions = getProjectConfig('tsconfig').compilerOptions;
 tsconfig.outDir = './build';
 tsconfig.declaration = true;
 const tslint: Lint.ILinterOptionsRaw = getProjectConfig('tslint');
