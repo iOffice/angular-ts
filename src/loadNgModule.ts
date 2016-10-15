@@ -23,7 +23,7 @@ function loadNgModule(callback: Function): any[] {
     return $q((resolve: Function) => {
       callback((file: any) => {
         const module: any = file.default;
-        $ocLazyLoad.load({ name: module.name });
+        $ocLazyLoad.load(module.name);
         resolve(module.name);
       });
     });

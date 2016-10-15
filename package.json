@@ -9,6 +9,7 @@
     "@types/colors": "0.6.33",
     "@types/lodash": "4.14.37",
     "@types/node": "6.0.45",
+    "@types/oclazyload": "0.0.31",
     "@types/yargs": "0.0.33",
     "colors": "^1.1.2",
     "eslint": "2.11.1",
@@ -33,7 +34,8 @@
     "yargs": "6.0.0"
   },
   "dependencies": {
-    "angular": "1.5.5",
+    "@types/angular": "^1.5.16",
+    "angular": "^1.5.8",
     "ts-helpers": "1.1.1"
   },
   "eslintConfig": {
