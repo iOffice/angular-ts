@@ -29,6 +29,7 @@ const argv: IArgs = yargs.usage('usage: $0 project')
 const tsconfig: ts.CompilerOptions = getProjectConfig('tsconfig').compilerOptions;
 tsconfig.outDir = './build';
 tsconfig.declaration = true;
+tsconfig.target = ts.ScriptTarget.ES3;
 const tslint: Lint.ILinterOptionsRaw = getProjectConfig('tslint');
 
 const projects: IProject[] = [

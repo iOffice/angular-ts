@@ -31,7 +31,7 @@
     "ts-loader": "0.8.2",
     "ts-node": "1.4.1",
     "tslint": "^3.15.1",
-    "typescript": "^2.1.0-dev.20161017",
+    "typescript": "^2.0.3",
     "webpack": "1.13.0",
     "yargs": "6.0.0"
   },
