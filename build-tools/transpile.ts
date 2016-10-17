@@ -38,6 +38,7 @@ const projects: IProject[] = [
       'build-tools/transpile.ts',
       'build-tools/karma.config.ts',
       'build-tools/webpack.config.ts',
+      'build-tools/pre-release.ts',
     ],
   },
 ];

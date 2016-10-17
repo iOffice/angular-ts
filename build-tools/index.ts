@@ -67,6 +67,12 @@ function filterModifiedFiles(project: IProject, targetDir: string, force?: boole
 
   const times: any = projectTimes[project.name];
   const filesToFilter: string[] = _.keys(times);
+  _.each(project.files, (fname) => {
+    if (!_.includes(filesToFilter, fname)) {
+      filesToFilter.push(fname);
+      times[fname] = 0;
+    }
+  });
   return _.filter(filesToFilter, (fileName) => {
     const stats: Stats = statSync(fileName);
     return times[fileName] === 0 || stats.mtime > new Date(times[fileName]);
