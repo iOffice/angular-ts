@@ -1,0 +1,13 @@
+[
+  {
+    "name": "build-tools",
+    "files": [
+      "build-tools/karma.config.ts",
+      "build-tools/webpack.config.ts"
+    ],
+    "compilerOptions": {
+      "outDir": "./build",
+      "declaration": true
+    }
+  }
+]
