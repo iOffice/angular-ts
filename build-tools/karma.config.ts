@@ -1,7 +1,13 @@
-// Karma configuration
+import { Config, ConfigOptions } from 'karma';
+import { Configuration } from 'webpack';
 
-module.exports = function karmaExports(config) {
-  config.set({
+interface IConfigOptions extends ConfigOptions {
+  webpack: Configuration;
+  webpackServer: any;
+}
+
+function karmaExports(config: Config): void {
+  const options: IConfigOptions = {
     frameworks: ['jasmine'],
     files: [
       '../test/index.ts',
@@ -18,20 +24,11 @@ module.exports = function karmaExports(config) {
       },
       module: {
         loaders: [
-          {
-            test: /\.ts$/,
-            loader: 'awesome-typescript-loader',
-            exclude: [
-              /node_modules\//,
-            ],
-          },
+          { test: /\.ts$/, loader: 'ts-loader', exclude: [/node_modules\//] },
           { test: /\.css$/, loader: 'style!css' },
           { test: /\.less$/, loader: 'style!css!less' },
           { test: /\.(jpe?g|png|gif|svg)$/i, loader: 'url?limit=100000' },
-          {
-            test: /sinon\.js$/,
-            loader: 'imports?define=>false,require=>false',
-          },
+          { test: /sinon\.js$/, loader: 'imports?define=>false,require=>false' },
         ],
       },
       watch: true,
@@ -51,5 +48,8 @@ module.exports = function karmaExports(config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-  });
-};
+  };
+  config.set(options);
+}
+
+export = karmaExports;

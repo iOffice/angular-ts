@@ -1,4 +1,6 @@
-// tslint:disable
 import 'ts-helpers';
-const context = require.context('.', true, /\.test\.ts$/);
+
+declare var require: any;
+
+const context: any = require.context('.', true, /\.test\.ts$/);
 context.keys().forEach(context);
