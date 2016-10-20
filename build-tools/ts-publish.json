@@ -2,6 +2,7 @@
   {
     "name": "build-tools",
     "files": [
+      "build-tools/ts-hook.ts",
       "build-tools/karma.config.ts",
       "build-tools/webpack.config.ts"
     ],
