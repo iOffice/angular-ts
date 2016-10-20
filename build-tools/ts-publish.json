@@ -1,5 +1,15 @@
 [
   {
+    "name": "angular-ts",
+    "files": [
+      "src/index.ts"
+    ],
+    "compilerOptions": {
+      "outDir": "./build/lib",
+      "declaration": true
+    }
+  },
+  {
     "name": "build-tools",
     "files": [
       "build-tools/ts-hook.ts",
