@@ -112,7 +112,7 @@
       "allow-undefined-check"
     ],
     "typedef": [
-      true,
+      false,
       "call-signature",
       "parameter",
       "property-declaration",
