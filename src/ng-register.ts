@@ -1,17 +1,15 @@
 /**
  * Obtained and modified from: https://github.com/michaelbromley/angular-es6
  */
-import * as angular from 'angular';
+import * as ng from 'angular';
 
-
-/* tslint:disable:forin */
+/* tslint:disable:forin no-invalid-this */
 /**
  * A helper class to simplify registering Angular components and provide a consistent syntax for
  * doing so.
  */
 class NgRegister {
-
-  app: angular.IModule;
+  app: ng.IModule;
   requires: Function;
   name: Function;
   provider: Function;
@@ -25,12 +23,13 @@ class NgRegister {
   component: Function;
   config: Function;
   run: Function;
+  [key: string]: any;
 
   constructor(appName: string, dependencies?: string[]) {
     if (dependencies === undefined) {
-      this.app = angular.module(appName);
+      this.app = ng.module(appName);
     } else {
-      this.app = angular.module(appName, dependencies);
+      this.app = ng.module(appName, dependencies);
     }
     const methods: string[] = [
       'requires',
@@ -56,7 +55,8 @@ class NgRegister {
 
   _wrapMethod(method: string): Function {
     return (...args: any[]) => {
-      this.app[method](...args);
+      // Casting to `any` since we are relying on access by index
+      (this.app as any)[method](...args);
       return this;
     };
   }
@@ -141,7 +141,7 @@ class NgRegister {
       // const instance = new constructorFn(...factoryArgs);
       const instance: any = new (Function.prototype.bind.apply(
           constructorFn,
-          [undefined].concat(factoryArgs))
+          [''].concat(factoryArgs))
       )();
       // see this: https://github.com/michaelbromley/angular-es6/issues/1
       for (const key in instance) {
@@ -173,19 +173,15 @@ class NgRegister {
   _override(object: any, methodName: string, callback: Function): void {
     object[methodName] = callback(object[methodName]);
   }
-
 }
-
 
 function ngRegister(appName: string, dependencies?: string[]): NgRegister {
   return new NgRegister(appName, dependencies);
 }
 
-
 export {
   NgRegister,
-  ngRegister
+  ngRegister,
 };
 
 export default ngRegister;
-

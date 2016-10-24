@@ -1,5 +1,5 @@
 import { inject } from './injectable';
-
+import * as ng from 'angular';
 
 interface Directive {
   controller?: any;
@@ -47,18 +47,13 @@ interface Directive {
     controller: any,
     transclude: ng.ITranscludeFunction
   ): void;
-
 }
 
-
 class Directive {
-
   constructor(args: any[]) {
     inject(this, args);
   }
-
 }
-
 
 export {
   Directive,

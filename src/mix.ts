@@ -13,9 +13,7 @@ function _addBase(clazz: any, mixin: any): void {
   }
 }
 
-
 class IMixin {
-
   constructor(...args: Array<any>[]) {
     args.forEach((arg: any[]) => {
       const clazz: any = arg[0];
@@ -29,13 +27,10 @@ class IMixin {
   }
 }
 
-
-// tslint:disable:typedef
 function mix(...mixins: any[]): typeof IMixin {
   class Mix extends IMixin {
-
+    [key: string]: any;
     static $$mixins: any[] = [];
-
   }
 
   mixins.forEach((mixin: any) => {
@@ -44,7 +39,8 @@ function mix(...mixins: any[]): typeof IMixin {
     // Necessary to inherit static methods
     for (const p in mixin) {
       if (p !== '$$mixins') {
-        Mix[p] = mixin[p];
+        // Not sure how to specify the index signature of `Mix`. Casting to any.
+        (Mix as any)[p] = mixin[p];
       }
     }
     // tslint:disable:forin
@@ -55,8 +51,6 @@ function mix(...mixins: any[]): typeof IMixin {
 
   return Mix;
 }
-// tslint:enable:typedef
-
 
 function _isinstance(object: any, classinfo: any): boolean {
   const proto: any = Object.getPrototypeOf(object);
@@ -74,7 +68,6 @@ function _isinstance(object: any, classinfo: any): boolean {
   return result;
 }
 
-
 function isinstance(object: any, classinfo: any): boolean {
   if (Array.isArray(classinfo)) {
     let result: boolean = false;
@@ -88,7 +81,6 @@ function isinstance(object: any, classinfo: any): boolean {
   }
   return _isinstance(object, classinfo);
 }
-
 
 export {
   IMixin,

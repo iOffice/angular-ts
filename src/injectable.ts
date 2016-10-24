@@ -17,13 +17,11 @@ function inject(clazz: any, injectables: (string | any)[]): void {
   });
 }
 
-
 function Inject(args: string[]): Function {
   return (target: any) => {
     inject(target, args);
   };
 }
-
 
 export {
   Inject,
