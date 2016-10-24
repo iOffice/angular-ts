@@ -1,6 +1,5 @@
 import { mix, isinstance } from '../src/mix';
 
-
 class A {
 
   a: number;

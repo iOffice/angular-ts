@@ -1,3 +1,5 @@
+/// <reference types="jasmine" />
+/// <reference types="oclazyload" />
 import 'ts-helpers';
 
 declare var require: any;
