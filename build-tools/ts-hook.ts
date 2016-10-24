@@ -1,26 +1,15 @@
 import {
-  IFileMessages,
-  getConfig,
-  parseTsPublishConfig,
-  compile,
   formatResults,
   move,
   run,
+  compileProject,
 } from 'ts-publish';
 import * as _ from 'lodash';
 
 function hook(): void {
-  const project = parseTsPublishConfig('./build-tools/ts-publish')[0];
-  const lintOptions: any = getConfig('tslint');
-
-  const results = compile(project, project.compilerOptions, lintOptions);
-  let numMessages: number = 0;
-  _.each(results, (file: IFileMessages) => {
-    numMessages += file.messages.length;
-  });
-
-  if (numMessages) {
-    process.stderr.write(formatResults(results));
+  const projectResult = compileProject('angular-ts', './build-tools/ts-publish');
+  if (projectResult.numMessages) {
+    process.stderr.write(formatResults(projectResult.results));
     // throw Error('messages found');
   }
 
