@@ -13,6 +13,7 @@
     "@types/oclazyload": "0.0.31",
     "@types/webpack": "^1.12.35",
     "@types/yargs": "0.0.33",
+    "ts-publish": "https://github.com/iOffice/ts-publish.git#pre-release",
     "colors": "^1.1.2",
     "jasmine": "2.4.1",
     "karma": "0.13.22",
@@ -33,17 +34,11 @@
     "ts-helpers": "1.1.1"
   },
   "scripts": {
-    "build-tools": "ts-compile build-tools --config build-tools/ts-publish",
-    "karma": "karma start ./build/karma.config.js --single-run",
-    "test": "run-s build-tools karma",
-    "_pre-release": "ts-pre-release build/ts-hook.js",
-    "pre-release": "run-s build-tools _pre-release",
-    "webpack": "webpack --config ./build/webpack.config.js --watch",
-    "dev": "run-s build-tools webpack",
-    "tsc": "bash ./build-tools/transpile.sh",
-    "release": "./build/publish.sh",
-    "dev-uglify": "export UGLIFY=true; webpack --config ./build-tools/webpack.config.js --watch",
-    "serve": "live-server --port=3004 --open=./example",
-    "start": "npm run serve & npm run dev"
+    "test": "make test",
+    "pre-release": "make preRelease",
+    "release": "make release",
+    "dev": "make dev",
+    "dev-uglify": "make UGLIFY=true dev",
+    "start": "make start"
   }
 }
