@@ -2354,9 +2354,9 @@ ts-loader@^0.8.2:
     object-assign "^2.0.0"
     semver "^5.0.1"
 
-"ts-publish@https://github.com/iOffice/ts-publish.git#88bcb36cdf87d38fbbbb2c26d5e62006bec5c16e":
-  version "0.0.0-beta.1477427043837"
-  resolved "https://github.com/iOffice/ts-publish.git#88bcb36cdf87d38fbbbb2c26d5e62006bec5c16e"
+"ts-publish@https://github.com/iOffice/ts-publish.git#81a5e558bccfbf796b846f0d7bd03d2768b77d43":
+  version "0.0.0-beta.1477427761213"
+  resolved "https://github.com/iOffice/ts-publish.git#81a5e558bccfbf796b846f0d7bd03d2768b77d43"
   dependencies:
     "@types/colors" "^0.6.33"
     "@types/lodash" "^4.14.37"
