@@ -22,7 +22,7 @@
     "live-server": "^1.0.0",
     "sinon": "^1.17.4",
     "ts-loader": "^0.8.2",
-    "ts-publish": "https://github.com/iOffice/ts-publish.git#pre-release",
+    "ts-publish": "https://github.com/iOffice/ts-publish.git#eafa27b2d3599287fa3b05c43fa5d7faa05d36f5",
     "tslint": "^3.15.1",
     "typescript": "^2.0.3",
     "webpack": "1.13.0",
