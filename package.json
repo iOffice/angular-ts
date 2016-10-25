@@ -13,7 +13,6 @@
     "@types/oclazyload": "0.0.31",
     "@types/webpack": "^1.12.35",
     "@types/yargs": "0.0.33",
-    "ts-publish": "https://github.com/iOffice/ts-publish.git#pre-release",
     "colors": "^1.1.2",
     "jasmine": "2.4.1",
     "karma": "0.13.22",
