@@ -1,10 +1,16 @@
 .idea/
 node_modules/
 build/
-examples/
+build-tools/
+example/
 src/
+test/
 
 .editorconfig
 .eslintignore
 .gitattributes
 .npmignore
+Makefile
+yarn.lock
+tslint.json
+tsconfig.json
