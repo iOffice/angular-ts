@@ -2,6 +2,7 @@ import {
   formatResults,
   move,
   run,
+  info,
   compileProject,
   cout,
   changePackageVersion,
@@ -30,14 +31,17 @@ function publish(action: string, version: string): void {
   const date = new Date();
   const finalVersion = action === 'pre-release' ? `${version}-beta.${date.valueOf()}` : version;
   cout(`Publishing version ${finalVersion}\n`);
+  let npmCmd = 'npm publish ';
   if (action === 'pre-release') {
     changePackageVersion(finalVersion);
     run(`git commit -m "[pre-release] v${finalVersion}"`);
-    run('npm publish --tag next');
+    npmCmd += '--tag next';
   } else {
     run(`git commit -m "[release] v${finalVersion}"`);
-    run('npm publish --tag latest');
+    npmCmd += '--tag latest';
   }
+  info('NPM');
+  run(npmCmd);
   pushTags(`v${finalVersion}`);
 }
 
