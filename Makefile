@@ -1,5 +1,5 @@
 buildTools:
-	ts-compile build-tools --config build-tools/ts-publish.json
+	ts-compile build-tools --config build-tools/ts-publish.json --verbose
 
 serve:
 	live-server --port=3004 --open=./example

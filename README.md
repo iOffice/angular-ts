@@ -1,5 +1,9 @@
 # Angular TS
 
+[![NPM Version](https://img.shields.io/npm/v/angular-ts.svg)](https://www.npmjs.com/package/angular-ts)
+[![License](https://img.shields.io/npm/l/angular-ts.svg)](LICENSE)
+
+
 This library provides `ngRegister`, a modified version of Michael Browmley's [`register.js`][1].
 
 ## Example
