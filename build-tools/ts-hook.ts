@@ -10,7 +10,7 @@ import {
 
 function hook(action: string, options?: any): void {
   const target = options ? options.target : '';
-  const projectResult = compileProject('angular-ts', './build-tools/ts-publish', true);
+  const projectResult = compileProject('angular-ts', './build-tools/ts-publish.json', true);
   if (projectResult.numMessages) {
     process.stderr.write(formatResults(projectResult.results));
     throw Error('messages found');
