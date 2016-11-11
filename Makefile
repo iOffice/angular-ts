@@ -13,6 +13,9 @@ karma: buildTools
 preRelease: buildTools
 	ts-pre-release build/ts-hook.js
 
+release: buildTools
+	ts-release build/ts-hook.js
+
 test: build-tools karma
 
 start: serve dev
