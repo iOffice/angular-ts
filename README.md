@@ -9,14 +9,13 @@ This library provides `ngRegister`, a modified version of Michael Browmley's [`r
 ```typescript
 import { ngRegister } from 'angular-ts';
 
-
 class MyAngularComponent {
-
   constructor(dependency1, dependency2) {
     this.dependency1 = dependency1;
     this.dependency2 = dependency2;
     // stuff happens here
   }
+
   someMethods() {
     this.dependency1.doThatThing();
     this.dependency2.doThatOtherThing();
@@ -24,7 +23,6 @@ class MyAngularComponent {
   }
 }
 MyAngularComponent.$inject = ['dependency1', 'dependency2'];
-
 
 ngRegister('app')
   .controller('MyController', MyAngularComponent)
@@ -39,13 +37,12 @@ or if you prefer to use the dependencies without declaring them you may use the 
 ```typescript
 import { ngRegister, inject } from 'angular-ts';
 
-
 class MyAngularComponent {
-
   constructor(...args) {
     inject(this, args);
     // stuff happens here
   }
+
   someMethods() {
     this.dependency1.doThatThing();
     this.dependency2.doThatOtherThing();
@@ -53,7 +50,6 @@ class MyAngularComponent {
   }
 }
 inject(MyAngularComponent, ['dependency1', 'dependency2']);
-
 
 ngRegister('app')
   .controller('MyController', MyAngularComponent)
@@ -71,17 +67,16 @@ import { ngRegister, inject } from 'angular-ts';
 
 @Inject(['dependency1', 'dependency2']);
 class MyAngularComponent {
-
   constructor(...args) {
     inject(this, args);
     // stuff happens here
   }
+
   someMethods() {
     this.dependency1.doThatThing();
     // more stuff here
   }
 }
-
 
 ngRegister('app')
   .controller('MyController', MyAngularComponent)
@@ -102,7 +97,6 @@ import { Inject } from 'angular-ts';
 
 @Inject(['a', 'b'])
 class MyDirective {
-
   // Directive options
   template: string;
   requires: string[];
@@ -131,7 +125,6 @@ import { Directive, Inject } from 'angular-ts';
 
 @Inject(['a', 'b'])
 class MyDirective extends Directive {
-
   // Injected Dependencies
   a: any;
   b: any;
@@ -143,7 +136,6 @@ class MyDirective extends Directive {
     ...
     // and so on ...
   }
-
 }
 ```
 
@@ -167,9 +159,7 @@ use the `mix` function provided by this library. For instance:
 ```typescript
 import { Directive, Inject, mix } from 'angular-ts';
 
-
 class OtherClass {
-
   constructor(a, b, c) {
     this.a = a;
     this.b = b;
@@ -179,7 +169,6 @@ class OtherClass {
   getA() {
     return this.a;
   }
-
 }
 
 @Inject([
@@ -188,7 +177,6 @@ class OtherClass {
   // and so on ...
 ])
 class SomeController extends mix(Directive, OtherClass) {
-
   constructor(...args) {
     super([Directive, args], [OtherClass, 1, 2, 3]);
   }
@@ -197,7 +185,6 @@ class SomeController extends mix(Directive, OtherClass) {
     console.log('Calling OtherClass method: ', this.getA());
     console.log('Using dependencies: ', this.dep1.somemethod);
   }
-
 }
 ```
 
@@ -210,17 +197,15 @@ the library.
 #### `inject(clazz: any, injectables: (string | any)[]): void`
 
 Can be used after a class declaration to inject its dependencies as well as inside the constructor
-to attach the dependecies to an instance of the class.
+to attach the dependencies to an instance of the class.
 
 ```typescript
 import { inject } from 'angular-ts';
 
 class A {
-
   constructor(...args: any[]) {
     inject(this, args);
   }
-
 }
 inject(A, ['a', 'b']);
 ```
@@ -238,11 +223,9 @@ import { Inject, inject } from 'angular-ts';
 
 @Inject(['a', 'b'])
 class A {
-
   constructor(...args: any[]) {
     inject(this, args);
   }
-
 }
 ```
 
@@ -374,5 +357,3 @@ Note: You will need to register `ocLazyLoad` with the app in order for this to w
 
 
 [1]: https://github.com/michaelbromley/angular-es6
-
-
