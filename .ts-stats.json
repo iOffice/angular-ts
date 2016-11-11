@@ -1,0 +1,75 @@
+{
+  "angular-ts": {
+    "name": "angular-ts",
+    "files": [
+      "/users/jmlopez/workspace/angular-ts/src/injectable.ts",
+      "/users/jmlopez/workspace/angular-ts/src/directive.ts",
+      "/users/jmlopez/workspace/angular-ts/src/ng-register.ts",
+      "/users/jmlopez/workspace/angular-ts/src/mix.ts",
+      "/users/jmlopez/workspace/angular-ts/src/loadngmodule.ts",
+      "/users/jmlopez/workspace/angular-ts/src/index.ts"
+    ],
+    "stats": {
+      "/users/jmlopez/workspace/angular-ts/src/injectable.ts": {
+        "fileName": "/Users/jmlopez/Workspace/angular-ts/src/injectable.ts",
+        "absPath": "/users/jmlopez/workspace/angular-ts/src/injectable.ts",
+        "emmittedFiles": [
+          "./build/lib/injectable.js",
+          "./build/lib/injectable.d.ts"
+        ],
+        "outDirectory": "./build/lib",
+        "lastModified": 1477329917000
+      },
+      "/users/jmlopez/workspace/angular-ts/src/directive.ts": {
+        "fileName": "/Users/jmlopez/Workspace/angular-ts/src/directive.ts",
+        "absPath": "/users/jmlopez/workspace/angular-ts/src/directive.ts",
+        "emmittedFiles": [
+          "./build/lib/directive.js",
+          "./build/lib/directive.d.ts"
+        ],
+        "outDirectory": "./build/lib",
+        "lastModified": 1477329917000
+      },
+      "/users/jmlopez/workspace/angular-ts/src/ng-register.ts": {
+        "fileName": "/Users/jmlopez/Workspace/angular-ts/src/ng-register.ts",
+        "absPath": "/users/jmlopez/workspace/angular-ts/src/ng-register.ts",
+        "emmittedFiles": [
+          "./build/lib/ng-register.js",
+          "./build/lib/ng-register.d.ts"
+        ],
+        "outDirectory": "./build/lib",
+        "lastModified": 1477329917000
+      },
+      "/users/jmlopez/workspace/angular-ts/src/mix.ts": {
+        "fileName": "/Users/jmlopez/Workspace/angular-ts/src/mix.ts",
+        "absPath": "/users/jmlopez/workspace/angular-ts/src/mix.ts",
+        "emmittedFiles": [
+          "./build/lib/mix.js",
+          "./build/lib/mix.d.ts"
+        ],
+        "outDirectory": "./build/lib",
+        "lastModified": 1477329917000
+      },
+      "/users/jmlopez/workspace/angular-ts/src/loadngmodule.ts": {
+        "fileName": "/Users/jmlopez/Workspace/angular-ts/src/loadNgModule.ts",
+        "absPath": "/users/jmlopez/workspace/angular-ts/src/loadngmodule.ts",
+        "emmittedFiles": [
+          "./build/lib/loadNgModule.js",
+          "./build/lib/loadNgModule.d.ts"
+        ],
+        "outDirectory": "./build/lib",
+        "lastModified": 1476989935000
+      },
+      "/users/jmlopez/workspace/angular-ts/src/index.ts": {
+        "fileName": "src/index.ts",
+        "absPath": "/users/jmlopez/workspace/angular-ts/src/index.ts",
+        "emmittedFiles": [
+          "./build/lib/index.js",
+          "./build/lib/index.d.ts"
+        ],
+        "outDirectory": "./build/lib",
+        "lastModified": 1468534365000
+      }
+    }
+  }
+}
