@@ -1,6 +1,6 @@
 {
   "name": "angular-ts",
-  "version": "0.1.2",
+  "version": "0.2.0",
   "description": "An approach to using ES6 classes in Angular JS 1.x with Typescript",
   "license": "MIT",
   "main": "lib/index.js",
