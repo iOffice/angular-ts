@@ -11,7 +11,6 @@
     "@types/karma": "^0.13.33",
     "@types/lodash": "^4.14.37",
     "@types/node": "^6.0.45",
-    "@types/oclazyload": "0.0.31",
     "@types/webpack": "^1.12.35",
     "@types/yargs": "0.0.33",
     "colors": "^1.1.2",

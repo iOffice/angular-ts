@@ -183,5 +183,3 @@ export {
   NgRegister,
   ngRegister,
 };
-
-export default ngRegister;
