@@ -13,3 +13,4 @@ tslint.json
 .gitattributes
 Makefile
 yarn.lock
+.ts-stats.json

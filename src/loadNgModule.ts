@@ -1,5 +1,3 @@
-import ILazyLoad = oc.ILazyLoad;
-
 /**
  * Utility function to help lazy load angular modules. To use it first require the module with
  * webpacks `bundle` loader:
@@ -19,15 +17,17 @@ import ILazyLoad = oc.ILazyLoad;
  * You may call `lazyLoadModule` anything you want, this is just a function that will resolve.
  */
 function loadNgModule(callback: Function): any[] {
-  return ['$q', '$ocLazyLoad', ($q: ng.IQService, $ocLazyLoad: ILazyLoad) => {
+  return ['$q', '$ocLazyLoad', ($q: ng.IQService, $ocLazyLoad: any) => {
     return $q((resolve: Function) => {
       callback((file: any) => {
         const module: any = file.default;
-        $ocLazyLoad.load(module.name);
+        $ocLazyLoad.load({ name: module.name });
         resolve(module.name);
       });
     });
   }];
 }
 
-export default loadNgModule;
+export {
+  loadNgModule,
+};
