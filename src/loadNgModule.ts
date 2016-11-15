@@ -16,7 +16,7 @@
  *
  * You may call `lazyLoadModule` anything you want, this is just a function that will resolve.
  */
-function loadNgModule(callback: Function): any[] {
+function loadNgModule(callback: any): any[] {
   return ['$q', '$ocLazyLoad', ($q: ng.IQService, $ocLazyLoad: any) => {
     return $q((resolve: Function) => {
       callback((file: any) => {
