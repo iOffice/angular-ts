@@ -15,8 +15,9 @@ interface INgComponentOptions {
 }
 
 /**
- * Attaches `__component` to the clazz object. If it already has one, then it overrides the
- * properties it needs to.
+ * Attaches `__component` to the clazz object. If this property already exists, which can happen
+ * when we extend a class, then the function creates a copy of the property and then overrides
+ * its values with the new `options`.
  *
  * @param clazz The class which will hold the `__component` property.
  * @param options An object of type `INgComponentOptions`.
@@ -24,6 +25,7 @@ interface INgComponentOptions {
 function attach(clazz: any, options: INgComponentOptions): void {
   const component: any = {};
   const currentComponent = clazz.__component;
+  // Copying the component
   if (currentComponent) {
     for (const key in currentComponent) {
       if (currentComponent.hasOwnProperty(key)) {
@@ -31,6 +33,7 @@ function attach(clazz: any, options: INgComponentOptions): void {
       }
     }
   }
+  // Overriding properties
   for (const key in options) {
     if (options.hasOwnProperty(key)) {
       component[key] = options[key];
