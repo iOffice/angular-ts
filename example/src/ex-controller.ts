@@ -5,19 +5,14 @@
 import { Directive, Inject, mix } from '../../src/index';
 import ExService from './ex-service';
 
-
 class Swimmer {
-
   swim(): void {
     console.log('swimming...');
   }
-
 }
-
 
 @Inject(['exService'])
 class ExController extends mix(Directive, Swimmer) {
-
   exService: ExService;
 
   constructor(...args: any[]) {
@@ -32,13 +27,10 @@ class ExController extends mix(Directive, Swimmer) {
     element.css('top', `${Math.random() * this.exService.getRange()}px`);
     return this;
   }
-
 }
-
 
 @Inject(['$log'])
 class DerivedController extends ExController {
-
   $log: ng.ILogService;
   exService: ExService;
 
@@ -51,9 +43,7 @@ class DerivedController extends ExController {
     this.$log.log('It has been called. Hey look, its injection: ', this.exService);
     return this;
   }
-
 }
-
 
 console.log('CHECK EM: ', DerivedController.$inject, ExController.$inject);
 
