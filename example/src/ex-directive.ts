@@ -1,7 +1,6 @@
 import DerivedController from './ex-controller';
 import { Directive, Inject } from '../../src/index';
 
-
 @Inject(['$interval'])
 class ExDirective extends Directive {
 
