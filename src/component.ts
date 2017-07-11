@@ -1,9 +1,8 @@
 import { Injectable, IOnChangesObject } from 'angular';
 
 /**
- * Valid properties to make an angularJS component. The `controller` and `controllerAs` properties
- * have been removed since we are trying to wrap a component to make it look more like an Angular
- * component.
+ * Valid properties to make an angularJS component. The `controller` property has been removed
+ * since we are trying to wrap a component to make it look more like an Angular component.
  */
 interface INgComponentOptions {
   selector: string;
@@ -12,6 +11,7 @@ interface INgComponentOptions {
   bindings?: {[boundProperty: string]: string};
   transclude?: boolean | {[slot: string]: string};
   require?: {[controller: string]: string};
+  controllerAs?: string;
 }
 
 /**
