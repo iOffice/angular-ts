@@ -69,7 +69,7 @@ use the `Inject` decorator. This allows us to write the previous example as
 ```typescript
 import { ngRegister, inject } from 'angular-ts';
 
-@Inject(['dependency1', 'dependency2']);
+@Inject(['dependency1', 'dependency2'])
 class MyAngularComponent {
   constructor(...args) {
     inject(this, args);
@@ -153,6 +153,62 @@ For other examples see `example/js/ex-directive.js`. One thing to mention here i
 `postLink` and `link` are both declared then only the `postLink` method will be called. These two
 methods should be one and the same so only declare one.
 
+
+## Component
+
+Angular 1.5 introduces `components`. These are were made to make migration to Angular 2 a bit
+easier. In order to migrate we can write components as follows:
+
+```typescript
+import {
+  Inject,
+  inject,
+  NgComponent,
+  NgOnInit,
+  NgPostLink,
+} from 'angular-ts';
+
+@NgComponent({
+  selector: 'ex-component',
+  template: '<div>This is the template</div>',
+})
+@Inject([
+  '$element',
+])
+class ExComponent implements NgOnInit, NgPostLink {
+  $element: JQuery;
+
+  constructor(...args: any[]) {
+    inject(this, args);
+  }
+
+  $onInit(): void {
+    this.$element.css('color', 'red');
+  }
+
+  $postLink(): void {
+    console.log('This is the postLink hook, analogous to the ngAfterViewInit and ngAfterContentInit hooks in Angular 2');
+  }
+}
+
+export {
+  ExComponent,
+};
+```
+
+To register the component you don't have to provide the selector name since this is already defined
+in the `NgComponent` decorator.
+
+```typescript
+import { ExComponent } from 'ExComponent'
+
+ngRegister('app')
+  .component(ExComponent);
+```
+
+See <https://docs.angularjs.org/guide/component> for more information on components and
+<https://docs.angularjs.org/api/ng/service/$compile#life-cycle-hooks> for an in depth explanation
+on the life cycle hooks.
 
 ## Mixins
 

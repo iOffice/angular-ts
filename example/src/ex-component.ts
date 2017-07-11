@@ -34,7 +34,7 @@ class ExComponent implements NgOnInit, NgPostLink {
     this.$element.css('position', 'absolute');
   }
 
-  $postLink(...args: any[]): void {
+  $postLink(): void {
     this.$interval(() => this.move(this.$element), 2500);
   }
 }
