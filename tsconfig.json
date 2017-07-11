@@ -2,6 +2,7 @@
   "compilerOptions": {
     "noImplicitAny": true,
     "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "noEmitHelpers": true,

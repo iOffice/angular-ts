@@ -113,8 +113,8 @@ class MyDirective {
   constructor(...args: any[]) {
     inject(this, args);
     this.template = 'template goes here';
-    this.requires: ['other directives']
-    ...
+    this.requires = ['other directives'];
+    // ...
     // and so on ...
   }
 
@@ -136,8 +136,8 @@ class MyDirective extends Directive {
   constructor(...args: any[]) {
     super(args);
     this.template = 'template goes here';
-    this.requires: ['other directives']
-    ...
+    this.requires = ['other directives'];
+    // ...
     // and so on ...
   }
 }

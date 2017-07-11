@@ -2,6 +2,15 @@
  * Obtained and modified from: https://github.com/michaelbromley/angular-es6
  */
 import * as ng from 'angular';
+import { INgComponentOptions } from './component';
+
+function toCamelCase(str: string, pascal: boolean = false): string {
+  const words = str.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1));
+  if (!pascal) {
+    words[0] = words[0].toLowerCase();
+  }
+  return words.join('');
+}
 
 /* tslint:disable:forin no-invalid-this */
 /**
@@ -20,7 +29,6 @@ class NgRegister {
   animation: Function;
   filter: Function;
   controller: Function;
-  component: Function;
   config: Function;
   run: Function;
   [key: string]: any;
@@ -44,7 +52,7 @@ class NgRegister {
       'filter',
       'controller',
       // 'directive',
-      'component',
+      // 'component',
       'config',
       'run',
     ];
@@ -63,6 +71,14 @@ class NgRegister {
 
   module(): ng.IModule {
     return this.app;
+  }
+
+  component(constructorFunction: Function): NgRegister {
+    const component = (constructorFunction as any).__component as INgComponentOptions;
+    const name = toCamelCase(component.selector);
+    console.log('REGISTERING:', [name, component]);
+    this.app.component(name, component);
+    return this;
   }
 
   directive(name: string, constructorFunction: Function): NgRegister {
