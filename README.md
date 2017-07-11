@@ -156,8 +156,8 @@ methods should be one and the same so only declare one.
 
 ## Component
 
-Angular 1.5 introduces `components`. These are were made to make migration to Angular 2 a bit
-easier. In order to migrate we can write components as follows:
+Angular 1.5 introduces `components`. These were made to make migration to Angular 2 a bit
+easier. To migrate we can write components as follows:
 
 ```typescript
 import {
@@ -196,7 +196,7 @@ export {
 };
 ```
 
-To register the component you don't have to provide the selector name since this is already defined
+To register the component we don't have to provide the selector name since this is already defined
 in the `NgComponent` decorator.
 
 ```typescript

@@ -76,7 +76,6 @@ class NgRegister {
   component(constructorFunction: Function): NgRegister {
     const component = (constructorFunction as any).__component as INgComponentOptions;
     const name = toCamelCase(component.selector);
-    console.log('REGISTERING:', [name, component]);
     this.app.component(name, component);
     return this;
   }
