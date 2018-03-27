@@ -1,7 +1,3 @@
-/// <reference types="jasmine" />
-import 'ts-helpers';
-
-declare var require: any;
-
-const context: any = require.context('.', true, /\.test\.ts$/);
-context.keys().forEach(context);
+import './mix-diamond.test';
+import './mix-generations.test';
+import './mix-methods.test';

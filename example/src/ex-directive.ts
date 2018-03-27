@@ -1,9 +1,8 @@
-import DerivedController from './ex-controller';
-import { Directive, Inject } from '../../src/index';
+import { DerivedController } from './ex-controller';
+import { Directive, Inject } from '../../src/main/index';
 
 @Inject(['$interval'])
 class ExDirective extends Directive {
-
   $interval: any;
 
   constructor(...args: any[]) {
@@ -22,10 +21,11 @@ class ExDirective extends Directive {
   }
 
   // optional link function
-  link(scope: any, element: any, attr: any, ctrl: DerivedController): void {
+  link(_scope: any, element: any, _attr: any, ctrl: DerivedController): void {
     this.$interval(() => ctrl.move(element), 2500);
   }
-
 }
 
-export default ExDirective;
+export {
+  ExDirective,
+};

@@ -145,7 +145,7 @@ class NgRegister {
   _createFactoryArray(constructorFn: Function): any[] {
     // get the array of dependencies that are needed by this component (as contained in the
     // `$inject` array)
-    const args: string[] = constructorFn.$inject || [];
+    const args: string[] = constructorFn.$inject as string[] || [];
     // create a copy of the array
     const factoryArray: any[] = args.slice();
     // The factoryArray uses Angular's array notation whereby each element of the array is the name

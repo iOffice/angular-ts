@@ -21,7 +21,7 @@ interface Directive {
   compile?(
     templateElement: ng.IAugmentedJQuery,
     templateAttributes: ng.IAttributes,
-    transclude?: ng.ITranscludeFunction
+    transclude?: ng.ITranscludeFunction,
   ): void;
 
   link?(
@@ -29,7 +29,7 @@ interface Directive {
     instanceElement: ng.IAugmentedJQuery,
     instanceAttributes: ng.IAttributes,
     controller: any,
-    transclude: ng.ITranscludeFunction
+    transclude: ng.ITranscludeFunction,
   ): void;
 
   preLink?(
@@ -37,7 +37,7 @@ interface Directive {
     instanceElement: ng.IAugmentedJQuery,
     instanceAttributes: ng.IAttributes,
     controller: any,
-    transclude: ng.ITranscludeFunction
+    transclude: ng.ITranscludeFunction,
   ): void;
 
   postLink?(
@@ -45,7 +45,7 @@ interface Directive {
     instanceElement: ng.IAugmentedJQuery,
     instanceAttributes: ng.IAttributes,
     controller: any,
-    transclude: ng.ITranscludeFunction
+    transclude: ng.ITranscludeFunction,
   ): void;
 }
 
