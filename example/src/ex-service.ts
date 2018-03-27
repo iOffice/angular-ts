@@ -1,5 +1,4 @@
 class ExService {
-
   range: number;
 
   constructor() {
@@ -14,7 +13,8 @@ class ExService {
   getRange(): number {
     return this.range;
   }
-
 }
 
-export default ExService;
+export {
+  ExService,
+};

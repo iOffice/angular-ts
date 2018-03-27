@@ -2,8 +2,8 @@
  * TOOD: What happens when we mix to Injectables? The super constructor will be messy, please don't
  * go there. Just don't.
  */
-import { Directive, Inject, mix } from '../../src/index';
-import ExService from './ex-service';
+import { Directive, Inject, mix } from '../../src/main/index';
+import { ExService } from './ex-service';
 
 class Swimmer {
   swim(): void {
@@ -11,8 +11,10 @@ class Swimmer {
   }
 }
 
+const MixedClass = mix(Directive, Swimmer);
+
 @Inject(['exService'])
-class ExController extends mix(Directive, Swimmer) {
+class ExController extends MixedClass {
   exService: ExService;
 
   constructor(...args: any[]) {
@@ -47,4 +49,9 @@ class DerivedController extends ExController {
 
 console.log('CHECK EM: ', DerivedController.$inject, ExController.$inject);
 
-export default DerivedController;
+export {
+  MixedClass,
+  Swimmer,
+  ExController,
+  DerivedController,
+};

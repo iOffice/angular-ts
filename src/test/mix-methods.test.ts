@@ -1,8 +1,7 @@
-import { mix } from '../src/mix';
-
+import { mix } from '../main/mix';
+import { expect } from 'chai';
 
 class A {
-
   a: number;
 
   constructor(a: number) {
@@ -12,12 +11,9 @@ class A {
   getA(): number {
     return this.a;
   }
-
 }
 
-
 class AB extends A {
-
   ab: number;
 
   constructor(a: number, ab: number) {
@@ -32,12 +28,9 @@ class AB extends A {
   getAB(): number {
     return this.ab;
   }
-
 }
 
-
 class AC extends A {
-
   ac: number;
 
   constructor(a: number, ac: number) {
@@ -52,12 +45,9 @@ class AC extends A {
   getAC(): number {
     return this.ac;
   }
-
 }
 
-
 class D1 extends mix(AB, AC) {
-
   d: number;
 
   // Inherited methods
@@ -75,9 +65,7 @@ class D1 extends mix(AB, AC) {
   }
 }
 
-
 class D2 extends mix(AB, AC) {
-
   d: number;
 
   // Inherited methods
@@ -108,25 +96,21 @@ class D2 extends mix(AB, AC) {
   }
 }
 
-
 describe('mix-method:override', () => {
-
   describe('extending classes should allow us to override', () => {
     const obj1: D1 = new D1(1, 2, 3, 4);
     const obj2: D2 = new D2(1, 2, 3, 4);
 
     it('should use the method of last mixin when using super', () => {
-      expect(obj1.getA()).toBe(2001);
-      expect(obj1.getAB()).toBe(2);
-      expect(obj1.getAC()).toBe(3);
-      expect(obj1.getD()).toBe(4);
+      expect(obj1.getA()).to.eq(2001);
+      expect(obj1.getAB()).to.eq(2);
+      expect(obj1.getAC()).to.eq(3);
+      expect(obj1.getD()).to.eq(4);
     });
 
     it('should use allow us to use any of the methods from the parents', () => {
-      expect(obj2.getA()).toBe(3003);
-      expect(obj2.getAB()).toBe(-2);
+      expect(obj2.getA()).to.eq(3003);
+      expect(obj2.getAB()).to.eq(-2);
     });
-
   });
-
 });

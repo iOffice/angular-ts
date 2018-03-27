@@ -1,8 +1,7 @@
-import 'ts-helpers';
-import { ngRegister } from '../../src/index';
-import ExDirective from './ex-directive';
+import { ngRegister } from '../../src/main/index';
+import { ExDirective } from './ex-directive';
 import { ExComponent, ExRedComponent } from './ex-component';
-import ExService from './ex-service';
+import { ExService } from './ex-service';
 
 class DemoController {}
 
@@ -16,3 +15,7 @@ ngRegister('DemoApp', [])
   .directive('exDirective', ExDirective)
   .service('exService', ExService)
 ;
+
+export {
+  DemoController,
+};

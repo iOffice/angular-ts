@@ -4,8 +4,8 @@ import {
   NgComponent,
   NgOnInit,
   NgPostLink,
-} from '../../src/index';
-import ExService from './ex-service';
+} from '../../src/main/index';
+import { ExService } from './ex-service';
 
 @NgComponent({
   selector: 'ex-component',

@@ -1,4 +1,4 @@
-## ANGULAR-TS EDITORCONFIG ##
+## @IOFFICE/ANGULAR-TS EDITORCONFIG ##
 
 
 ### TOP MOST EDITORCONFIG FILE ###
@@ -13,12 +13,6 @@ insert_final_newline = true
 end_of_line = lf
 indent_style = space
 indent_size = 2
-
-
-### PYTHON ###
-[*.py]
-indent_style = space
-indent_size = 4
 
 
 ### MAKEFILE ###

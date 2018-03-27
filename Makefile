@@ -1,21 +1,39 @@
-buildTools:
-	ts-compile build-tools --config build-tools/ts-publish.json --verbose
+## Tasks
 
-serve:
-	live-server --port=3004 --open=./example
+test: tcBuild
 
-dev: buildTools
-	webpack --config ./build/webpack.config.js --watch
+preRelease: build
+	PRERELEASE=true tc-builder run
 
-karma: buildTools
-	karma start ./build/karma.config.js --single-run
+tcBuild: info build
+	tc-builder run
 
-preRelease: buildTools
-	ts-pre-release build/ts-hook.js
+docs: FORCE
+	cd src; ../node_modules/.bin/typedoc --out ../docs main --target es6 --ignoreCompilerErrors --mode modules --module commonjs --hideGenerator --excludePrivate --name '@ioffice/angular-ts $(VERSION)'
 
-release: buildTools
-	ts-release build/ts-hook.js
+serveDocs:
+	cd docs; python -m SimpleHTTPServer 8000
 
-test: build-tools karma
+## Example
 
-start: serve dev
+start:
+	cd example; python -m SimpleHTTPServer 8001
+
+dev:
+	webpack --config ./example/webpack.config.ts --watch
+
+## Dependencies
+
+build: FORCE
+	tc-builder compile
+
+clean:
+	rm -rf build
+
+info:
+	node --version
+	npm --version
+	tsc --version
+	typedoc --version
+
+FORCE:
