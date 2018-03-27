@@ -48,5 +48,8 @@
     "angular",
     "typescript",
     "es6"
-  ]
+  ],
+  "publishConfig": {
+    "registry": "https://registry.npmjs.com"
+  }
 }
