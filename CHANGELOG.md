@@ -1,8 +1,6 @@
 # Change Log
 
-## [0.0.1] - Date of release
+## [1.0.0] - March 27, 2018
+- Published to npm under the `@ioffice` scope
 
-Description
-
-[0.0.1]: https://github.com/ioffice/angular-ts/compare/<hash/tag>...0.0.1
-    
+[1.0.0]: https://github.com/ioffice/angular-ts/compare/v0.3.0...1.0.0
