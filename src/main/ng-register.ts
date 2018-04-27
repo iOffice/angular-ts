@@ -155,8 +155,8 @@ class NgRegister {
       // typescript can't convert the next line, using the output from babel instead
       // const instance = new constructorFn(...factoryArgs);
       const instance: any = new (Function.prototype.bind.apply(
-          constructorFn,
-          [''].concat(factoryArgs))
+        constructorFn,
+        [''].concat(factoryArgs))
       )();
       // see this: https://github.com/michaelbromley/angular-es6/issues/1
       for (const key in instance) {

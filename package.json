@@ -6,7 +6,8 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "devDependencies": {
-    "@ioffice/tc-builder": "1.0.0",
+    "@ioffice/tc-builder": "1.2.1",
+    "@ioffice/tslint-config-ioffice": "^0.2.0",
     "@types/angular": "1.6.43",
     "@types/chai": "4.1.2",
     "@types/mocha": "2.2.48",
@@ -23,7 +24,7 @@
     "mocha": "5.0.1",
     "moment": "2.21.0",
     "progress": "2.0.0",
-    "request": "2.83.0",
+    "request": "2.85.0",
     "request-promise": "4.2.2",
     "request-promise-core": "1.1.1",
     "semver": "5.5.0",

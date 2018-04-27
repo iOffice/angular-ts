@@ -1,17 +1,7 @@
 {
+  "extends": "./node_modules/@ioffice/tslint-config-ioffice/tsconfig.core.json",
   "compilerOptions": {
-    "skipDefaultLibCheck": true,
-    "skipLibCheck": true,
-    "noImplicitAny": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "strictNullChecks": true,
     "strictPropertyInitialization": false,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "noEmitHelpers": true,
-    "importHelpers": true,
     "target": "es5",
     "declaration": true,
     "noEmit": false,
