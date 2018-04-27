@@ -1,6 +1,7 @@
 {
   "extends": "./node_modules/@ioffice/tslint-config-ioffice/tsconfig.core.json",
   "compilerOptions": {
+    "strictPropertyInitialization": false,
     "target": "es5",
     "declaration": true,
     "noEmit": false,

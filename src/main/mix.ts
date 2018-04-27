@@ -70,7 +70,7 @@ function _isinstance(object: any, classinfo: any): boolean {
 
 function isinstance(object: any, classinfo: any): boolean {
   if (Array.isArray(classinfo)) {
-    let result: boolean = false;
+    let result = false;
     for (const index in classinfo) {
       if (_isinstance(object, classinfo[index])) {
         result = true;
