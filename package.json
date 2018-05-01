@@ -1,6 +1,6 @@
 {
   "name": "@ioffice/angular-ts",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "An approach to using ES6 classes in Angular JS 1.x with Typescript",
   "license": "MIT",
   "main": "index.js",
