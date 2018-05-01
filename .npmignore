@@ -14,3 +14,4 @@ tslint.json
 Makefile
 yarn.lock
 .ts-stats.json
+*.build.cmd
