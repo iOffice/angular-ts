@@ -19,8 +19,8 @@ function toCamelCase(str: string, pascal: boolean = false): string {
  */
 class NgRegister {
   app: ng.IModule;
-  requires: Function;
-  name: Function;
+  requires: string[];
+  name: string;
   provider: Function;
   service: Function;
   value: Function;
@@ -40,8 +40,8 @@ class NgRegister {
       this.app = ng.module(appName, dependencies);
     }
     const methods: string[] = [
-      'requires',
-      'name',
+      // 'requires',
+      // 'name',
       'provider',
       // 'factory',
       'service',
@@ -63,8 +63,7 @@ class NgRegister {
 
   _wrapMethod(method: string): Function {
     return (...args: any[]) => {
-      // Casting to `any` since we are relying on access by index
-      (this.app as any)[method](...args);
+      this.app[method](...args);
       return this;
     };
   }
