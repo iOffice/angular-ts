@@ -22,7 +22,7 @@ function loadNgModule(callback: any): any[] {
       callback((file: any) => {
         const modules = Object.keys(file).filter(key => key.endsWith('Module'));
         if (modules.length !== 1) {
-          throw new Error('More than one module is exported in lazy module');
+          throw new Error('Only one angularJS module should be exported in a lazy module');
         }
 
         const module: any = file[modules[0]];
