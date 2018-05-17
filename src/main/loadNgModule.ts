@@ -20,7 +20,12 @@ function loadNgModule(callback: any): any[] {
   return ['$q', '$ocLazyLoad', ($q: ng.IQService, $ocLazyLoad: any) => {
     return $q((resolve: Function) => {
       callback((file: any) => {
-        const module: any = file.default;
+        const modules = Object.keys(file).filter(key => key.endsWith('Module'));
+        if (modules.length !== 1) {
+          throw new Error('More than one module is exported in lazy module');
+        }
+
+        const module: any = file[modules[0]];
         $ocLazyLoad.load({ name: module.name });
         resolve(module.name);
       });
