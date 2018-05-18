@@ -11,7 +11,7 @@ import {
 import { Directive } from './directive';
 import { ngRegister } from './ng-register';
 import { mix, isinstance } from './mix';
-import { loadNgModule } from './loadNgModule';
+import { loadNgModule, loadNgModuleNoDefault } from './loadNgModule';
 
 export {
   inject,
@@ -28,4 +28,5 @@ export {
   mix,
   isinstance,
   loadNgModule,
+  loadNgModuleNoDefault,
 };
