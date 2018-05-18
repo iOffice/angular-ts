@@ -1,6 +1,6 @@
 # Angular TS
 
-[![NPM Version](https://img.shields.io/npm/v/angular-ts.svg)](https://www.npmjs.com/package/angular-ts)
+[![NPM Version](https://img.shields.io/npm/v/@ioffice/angular-ts.svg)](https://www.npmjs.com/package/@ioffice/angular-ts)
 [![License](https://img.shields.io/npm/l/angular-ts.svg)](LICENSE)
 
 
