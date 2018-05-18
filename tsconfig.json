@@ -5,6 +5,7 @@
     "target": "es5",
     "declaration": true,
     "noEmit": false,
+    "lib": ["es6"],
     "outDir": "./build"
   },
   "files": [
