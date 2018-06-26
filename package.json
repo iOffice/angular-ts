@@ -6,7 +6,7 @@
   "main": "index.js",
   "typings": "index.d.ts",
   "devDependencies": {
-    "@ioffice/tc-builder": "2.0.1-beta.1806261210",
+    "@ioffice/tc-builder": "2.1.0",
     "@ioffice/tslint-config-ioffice": "^0.2.0",
     "@types/angular": "1.6.43",
     "@types/chai": "4.1.2",
