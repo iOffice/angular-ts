@@ -8,6 +8,9 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
 
+## [1.1.1] - June 26, 2018
+- _No changes_: this release is a verification of a succesful migration to Travis.
+
 
 ## [1.1.0] - May 18, 2018
 - Added `loadNgModuleNoDefault` so that ngModules may be exported with their name ending in
@@ -28,7 +31,8 @@ adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 - Published to npm under the `@ioffice` scope
 
 
-[Unreleased]: https://github.com/ioffice/angular-ts/compare/1.1.0...HEAD
+[Unreleased]: https://github.com/ioffice/angular-ts/compare/1.1.1...HEAD
+[1.1.1]: https://github.com/ioffice/angular-ts/compare/1.1.1...1.1.1
 [1.1.0]: https://github.com/ioffice/angular-ts/compare/1.0.2...1.1.0
 [1.0.2]: https://github.com/ioffice/angular-ts/compare/1.0.1...1.0.2
 [1.0.1]: https://github.com/ioffice/angular-ts/compare/1.0.0...1.0.1
