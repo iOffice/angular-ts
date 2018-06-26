@@ -19,7 +19,7 @@ env:
   - secure: "OwwhJRDaKasrcx1Asjbn0rxPh25h9F7uF2kTcrcAUpzDKgS9OeT0pbNqyx9Z2q2LS4RIvUczHeIH1mmhJKbYY/kF5xhsUBn99H4zrC2UXdzQY5SQDkCL/3RoIOSLNznqKk429MmMbL8tVsaltWKIKg0cjFHAzaGVK3cJRKViwetiOvfuG61kdbtCXuVpp2KQl0Ujg/9ScxDrtekSY4Y/gCIWTAf+pzkfQY+UjSgoHFQz5SqGkHnqTO5om5rCyBgeYg1KILG2Lt61xzwYpicHCUdr30JRw0dpyFfYEiDf76VspBKfsrW6hmqwZgurjFOf/yN84RWxci6RnGz4gZFFNnsm+e+DnYrm6EVB5jNYIRwsGMZon7RZ6ms6ZIY/F1DtBZCC//af5A79gKa7yZShNbD5p4UxM4kDQvAW7CmhpXc0nRbX0f2VhfA2nbdMrS+pgk31MwySlMN+LiPXRVWonbC0CmETsRdQK1SndutHSJ5xP54Ddrw9QWOhb9e0xKSoMHos4En+Y1AnlV9MjJ58Z/cQ/nTnp2wsdyVD1DWz1NziVthnhoIGJnMrIlCPRCNautr1R3AmBk8hLfhhb5LCklPw/ZnRXefRNyiMSBVv06dCjvmQdaVz8wzh3MLOELlOQHd2ukO6RHDu7ublnazNpSKCOKI77nE67gaKKITyB94="
 
 before_install:
-  - echo "//registry.npmjs.org/:_authToken=\${NPM_TOKEN}" > .npmrc
+  - echo "//registry.npmjs.com/:_authToken=\${NPM_TOKEN}" > .npmrc
   - curl -o- -L https://yarnpkg.com/install.sh | bash
   - export PATH="$HOME/.yarn/bin:$PATH"
 
