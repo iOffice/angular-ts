@@ -5,3 +5,4 @@ typings/
 lib/
 **/*.js
 dist/
+tcBuilderMessages.json
